@@ -23,7 +23,7 @@ Gogoanime is a custom API that provides data from the `gogoanime.ai` website. Yo
 [![Node.js Package](https://github.com/jainprashul/gogoanime/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/jainprashul/gogoanime/actions/workflows/npm-publish.yml)
 
 
-## :tada: Updates in version v1.0.1 :tada:
+## :tada: Updates in version v1.0.3 :tada:
 - [x] *Iframe Decoder for vidstreaming*
   - `decodeVidstreamingIframeURL([iframe_url])`
 
