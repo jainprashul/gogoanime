@@ -6,16 +6,16 @@ Gogoanime is a custom API that provides data from the `10.gogoanime.io` website.
 <p align="center">
   <img src="https://img.shields.io/badge/node->=10.16.x-brightgreen.svg" />
   <img src="https://img.shields.io/badge/npm->=6.9.x-brightgreen.svg" />
-  <a href="https://github.com/ChrisMichaelPerezSantiago/gogoanime/graphs/commit-activity">
+  <a href="https://github.com/jainprashul/gogoanime/graphs/commit-activity">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" />
   </a>
-  <a href="https://github.com/ChrisMichaelPerezSantiago/gogoanime/blob/master/LICENSE">
+  <a href="https://github.com/jainprashul/gogoanime/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
   </a>
   <img src="https://img.shields.io/badge/now.sh-deployed-brightgreen.svg" alt="">
   <img src="https://badgen.net/badge/icon/now?icon=now&label" alt="">
   <img src="https://img.shields.io/badge/gogoanime-API-brightgreen.svg" alt="">
-  <img src="https://img.shields.io/github/stars/ChrisMichaelPerezSantiago/gogoanime?style=social" alt="">
+  <img src="https://img.shields.io/github/stars/jainprashul/gogoanime?style=social" alt="">
 </p>
 
 <p align="center">
@@ -26,6 +26,10 @@ Gogoanime is a custom API that provides data from the `10.gogoanime.io` website.
 ## :tada: Updates in version v1.0.1 :tada:
 - [x] *Iframe Decoder for vidstreaming*
   - `decodeVidstreamingIframeURL([iframe_url])`
+
+## Added AnimeContentHandler
+
+- `animeContentHandler(id)`
 
 
 ## :rocket: Custom gogoanime API Link
@@ -891,7 +895,7 @@ api.animeEpisodeHandler('actors-songs-connection-episode-9')
 
 ### **:busts_in_silhouette: Credits**
 
-- [Chris Michael](https://github.com/ChrisMichaelPerezSantiago) (Project Leader, and Developer)
+- [Prashul Jain](https://github.com/jainprashul) (Project Leader, and Developer)
 
 ---
 
@@ -912,11 +916,11 @@ Feel free to open issues or submit pull-requests to help me improving my work.
 
 ### **:robot: Author**
 
-_*Chris Michael*_
+_*Prashul Jain*_
 
 > You can follow me on
-[github](https://github.com/ChrisMichaelPerezSantiago)&nbsp;&middot;&nbsp;[twitter](https://twitter.com/Chris5855M)
+[github](https://github.com/jainprashul)&nbsp;&middot;&nbsp;[twitter](https://twitter.com/Chris5855M)
 
 ---
 
-Copyright © 2019 [Chris Michael](http://personal-porfolio.chrismichael.now.sh).
+Copyright © 2021 [Prashul Jain](https://jainprashul.now.sh).
