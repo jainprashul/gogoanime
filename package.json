@@ -9,12 +9,12 @@
     "dev-api": "nodemon ./src/api/api.js"
   },
   "author": {
-    "name": "Chris Michael",
-    "email": "chrisperezsantiago1@gmail.com",
-    "url": "http://personal-porfolio.chrismichael.now.sh",
+    "name": "Prashul Jain",
+    "email": "jainprashul@gmail.com",
+    "url": "https://jainprashul.now.sh",
     "social": {
-      "github": "https://github.com/ChrisMichaelPerezSantiago",
-      "twitter": "https://twitter.com/Chris5855M"
+      "github": "https://github.com/jainprashul",
+      "twitter": "https://twitter.com/PrashulJain"
     }
   },
   "license": "MIT",
@@ -47,8 +47,8 @@
   ],
   "contributors": [
     {
-      "name": "Chris Michael",
-      "url": "https://github.com/ChrisMichaelPerezSantiago",
+      "name": "Prashul Jain",
+      "url": "https://github.com/jainprashul",
       "reason": "Project Leader, and Developer"
     }
   ],
@@ -57,10 +57,10 @@
     "npm": ">= 6.9.x"
   },
   "bugs": {
-    "url": "https://github.com/ChrisMichaelPerezSantiago/gogoanime/issues"
+    "url": "https://github.com/jainprashul/gogoanime/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChrisMichaelPerezSantiago/gogoanime.git"
+    "url": "https://github.com/jainprashul/gogoanime.git"
   }
 }
