@@ -1,5 +1,5 @@
 <p align="center">
-Gogoanime is a custom API that provides data from the `10.gogoanime.io` website. You will have access to the entire catalog whether movies, series, current episodes, etc., with English subtitles.
+Gogoanime is a custom API that provides data from the `gogoanime.ai` website. You will have access to the entire catalog whether movies, series, current episodes, etc., with English subtitles.
 </p>
 
 
@@ -919,7 +919,7 @@ Feel free to open issues or submit pull-requests to help me improving my work.
 _*Prashul Jain*_
 
 > You can follow me on
-[github](https://github.com/jainprashul)&nbsp;&middot;&nbsp;[twitter](https://twitter.com/Chris5855M)
+[github](https://github.com/jainprashul)&nbsp;&middot;&nbsp;[twitter](https://twitter.com/Prashul Jain)
 
 ---
 
