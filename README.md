@@ -18,9 +18,9 @@ Gogoanime is a custom API that provides data from the `gogoanime.ai` website. Yo
   <img src="https://img.shields.io/github/stars/jainprashul/gogoanime?style=social" alt="">
 </p>
 
-<p align="center">
- <a href="https://nodei.co/npm/gogoanime/"><img src="https://nodei.co/npm/gogoanime.png"></a>
-</p>
+
+
+[![Node.js Package](https://github.com/jainprashul/gogoanime/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/jainprashul/gogoanime/actions/workflows/npm-publish.yml)
 
 
 ## :tada: Updates in version v1.0.1 :tada:
