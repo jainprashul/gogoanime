@@ -4,19 +4,20 @@ const cheerio = require('cheerio');
 const url = require('./urls');
 
 
-const ongoingSeries = async() =>{
+const ongoingSeries = async () => {
   const res = await fetch(`${url.BASE_URL}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  Array.from({length: 30} , (v , k) =>{
-    $('div.main_body div.series nav.menu_series ul li').eq(k + 1).each((index , element) =>{
+  Array.from({ length: 30 }, (v, k) => {
+    $('div.main_body div.series nav.menu_series ul li').eq(k + 1).each((index, element) => {
       const $element = $(element);
       const id = $element.find('a').attr('href');
-      const title = $element.find('a').text(); 
-      promises.push(animeContentHandler(id).then(extra =>({
-        title: title ? title : null,                   
+      const title = $element.find('a').text();
+      promises.push(animeContentHandler(id).then(extra => ({
+        title: title ? title : null,
+        id: id ? id.replace('/category/', '') : null,
         img: extra[0] ? extra[0].img : null,
         synopsis: extra[0] ? extra[0].synopsis : null,
         genres: extra[0] ? extra[0].genres : null,
@@ -24,25 +25,26 @@ const ongoingSeries = async() =>{
         status: extra[0] ? extra[0].status : null,
         otherName: extra[0] ? extra[0].otherName : null,
         totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-        episodes: extra[0] ? extra[0].episodes: null
+        episodes: extra[0] ? extra[0].episodes : null
       })));
     })
   });
   return await Promise.all(promises);
 };
 
-const search = async(query) =>{
+const search = async (query) => {
   const res = await fetch(`${url.BASE_URL}/search.html?keyword=${query}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  $('div.main_body div.last_episodes ul.items li').each((index , element) =>{
+  $('div.main_body div.last_episodes ul.items li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('a').attr('href');
     const title = $element.find('a').text().trim();
-    promises.push(animeContentHandler(id).then(extra =>({
-      title: title ? title : null,                   
+    promises.push(animeContentHandler(id).then(extra => ({
+      title: title ? title : null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0] ? extra[0].img : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
@@ -50,24 +52,25 @@ const search = async(query) =>{
       status: extra[0] ? extra[0].status : null,
       otherName: extra[0] ? extra[0].otherName : null,
       totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-      episodes: extra[0] ? extra[0].episodes: null
+      episodes: extra[0] ? extra[0].episodes : null
     })));
   });
   return await Promise.all(promises);
 };
 
-const genres = async(genre , page) =>{
+const genres = async (genre, page) => {
   const res = await fetch(`${url.BASE_URL}/genre/${genre}?page=${page}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  $('div.main_body div.last_episodes ul.items li').each((index , element) =>{
+  $('div.main_body div.last_episodes ul.items li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('a').attr('href');
     const title = $element.find('a').text().trim();
-    promises.push(animeContentHandler(id).then(extra =>({
-      title: title ? title : null,                   
+    promises.push(animeContentHandler(id).then(extra => ({
+      title: title ? title : null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0] ? extra[0].img : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
@@ -75,24 +78,25 @@ const genres = async(genre , page) =>{
       status: extra[0] ? extra[0].status : null,
       otherName: extra[0] ? extra[0].otherName : null,
       totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-      episodes: extra[0] ? extra[0].episodes: null
+      episodes: extra[0] ? extra[0].episodes : null
     })));
   });
   return await Promise.all(promises);
 };
 
-const alphabetList = async(letter , page) =>{
+const alphabetList = async (letter, page) => {
   const res = await fetch(`${url.BASE_URL}/anime-list-${letter}?page=${page}`)
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  $('div.main_body div.anime_list_body ul.listing li').each((index , element) =>{
+  $('div.main_body div.anime_list_body ul.listing li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('a').attr('href');
     const title = $element.find('a').text().trim();
-    promises.push(animeContentHandler(id).then(extra =>({
-      title: title ? title : null,                   
+    promises.push(animeContentHandler(id).then(extra => ({
+      title: title ? title : null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0] ? extra[0].img : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
@@ -100,24 +104,25 @@ const alphabetList = async(letter , page) =>{
       status: extra[0] ? extra[0].status : null,
       otherName: extra[0] ? extra[0].otherName : null,
       totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-      episodes: extra[0] ? extra[0].episodes: null
+      episodes: extra[0] ? extra[0].episodes : null
     })));
   });
   return await Promise.all(promises);
 };
 
-const newSeasons = async(page) =>{
+const newSeasons = async (page) => {
   const res = await fetch(`${url.BASE_URL}/new-season.html?page=${page}`)
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
-  
-  $('div.main_body div.last_episodes ul.items li').each((index , element) =>{
+
+  $('div.main_body div.last_episodes ul.items li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('div.img a').attr('href');
     const title = $element.find('a').text().trim();
-    promises.push(animeContentHandler(id).then(extra =>({
-      title: title ? title : null,                   
+    promises.push(animeContentHandler(id).then(extra => ({
+      title: title ? title : null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0] ? extra[0].img : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
@@ -125,24 +130,25 @@ const newSeasons = async(page) =>{
       status: extra[0] ? extra[0].status : null,
       otherName: extra[0] ? extra[0].otherName : null,
       totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-      episodes: extra[0] ? extra[0].episodes: null
+      episodes: extra[0] ? extra[0].episodes : null
     })));
   })
   return await Promise.all(promises);
 };
 
-const movies = async(page) =>{
+const movies = async (page) => {
   const res = await fetch(`${url.BASE_URL}/anime-movies.html?page=${page}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
-  
-  $('div.main_body div.last_episodes ul.items li').each((index , element) =>{
+
+  $('div.main_body div.last_episodes ul.items li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('div.img a').attr('href');
     const title = $element.find('a').text().trim();
-    promises.push(animeContentHandler(id).then(extra =>({
-      title: title ? title : null,                   
+    promises.push(animeContentHandler(id).then(extra => ({
+      title: title ? title : null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0] ? extra[0].img : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
@@ -150,24 +156,25 @@ const movies = async(page) =>{
       status: extra[0] ? extra[0].status : null,
       otherName: extra[0] ? extra[0].otherName : null,
       totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-      episodes: extra[0] ? extra[0].episodes: null
+      episodes: extra[0] ? extra[0].episodes : null
     })));
   })
   return await Promise.all(promises);
 };
 
-const popular = async(page) =>{
+const popular = async (page) => {
   const res = await fetch(`${url.BASE_URL}/popular.html?page=${page}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
-  
-  $('div.main_body div.last_episodes ul.items li').each((index , element) =>{
+
+  $('div.main_body div.last_episodes ul.items li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('div.img a').attr('href');
     const title = $element.find('a').text().trim();
-    promises.push(animeContentHandler(id).then(extra =>({
-      title: title ? title : null,                   
+    promises.push(animeContentHandler(id).then(extra => ({
+      title: title ? title : null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0] ? extra[0].img : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
@@ -175,24 +182,25 @@ const popular = async(page) =>{
       status: extra[0] ? extra[0].status : null,
       otherName: extra[0] ? extra[0].otherName : null,
       totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-      episodes: extra[0] ? extra[0].episodes: null
+      episodes: extra[0] ? extra[0].episodes : null
     })));
   })
   return await Promise.all(promises);
 };
 
-const recentlyAddedSeries = async() =>{
+const recentlyAddedSeries = async () => {
   const res = await fetch(`${url.BASE_URL}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  $('div.main_body.none div.added_series_body ul.listing li').each((index , element) => {
+  $('div.main_body.none div.added_series_body ul.listing li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('a').attr('href');
     const title = $element.find('a').text();
-    promises.push(animeContentHandler(id).then(extra =>({
-      title: title ? title : null,                   
+    promises.push(animeContentHandler(id).then(extra => ({
+      title: title ? title : null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0] ? extra[0].img : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
@@ -200,25 +208,26 @@ const recentlyAddedSeries = async() =>{
       status: extra[0] ? extra[0].status : null,
       otherName: extra[0] ? extra[0].otherName : null,
       totalEpisodes: extra[0] ? extra[0].totalEpisodes : null,
-      episodes: extra[0] ? extra[0].episodes: null
+      episodes: extra[0] ? extra[0].episodes : null
     })));
   });
   return await Promise.all(promises);
 };
 
-const recentReleaseEpisodes = async(page) =>{
+const recentReleaseEpisodes = async (page) => {
   const res = await fetch(`${url.BASE_URL}/?page=${page}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  $('div.main_body div.last_episodes.loaddub ul.items li').each((index , element) => {
+  $('div.main_body div.last_episodes.loaddub ul.items li').each((index, element) => {
     const $element = $(element);
     const id = $element.find('p.name a').attr('href');
     const title = $element.find('p.name a').text();
-    const episode = parseInt($element.find('p.episode').text().match(/\d+/g) , 10);
-    promises.push(animeEpisodeHandler(id).then(extra =>({
-      title: title || null,                   
+    const episode = parseInt($element.find('p.episode').text().match(/\d+/g), 10);
+    promises.push(animeEpisodeHandler(id).then(extra => ({
+      title: title || null,
+      id: id ? id.replace('/category/', '') : null,
       img: extra[0].img || null,
       synopsis: extra[0].synopsis || null,
       genres: extra[0].genres || null,
@@ -234,32 +243,33 @@ const recentReleaseEpisodes = async(page) =>{
   return await Promise.all(promises);
 };
 
-const animeEpisodeHandler = async(id) =>{
+const animeEpisodeHandler = async (id) => {
   const res = await fetch(`${url.BASE_URL}/${id}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  $('div#wrapper_bg').each((index , element) =>{
+  $('div#wrapper_bg').each((index, element) => {
     const $element = $(element);
     const animeId = $element.find('div.anime_video_body div.anime_video_body_cate div.anime-info a').attr('href');
     const category = $element.find('div.anime_video_body div.anime_video_body_cate a').attr('href').split('/')[2].trim();
 
     const servers = [];
-    $element.find('div.anime_muti_link ul li').each((j , el) =>{
+    $element.find('div.anime_muti_link ul li').each((j, el) => {
       const $el = $(el);
-      const name = $el.find('a').text().substring(0 , $el.find('a').text().lastIndexOf('C')).trim();
+      const name = $el.find('a').text().substring(0, $el.find('a').text().lastIndexOf('C')).trim();
       let iframe = $el.find('a').attr('data-video');
-      if(iframe.startsWith('//')){
+      if (iframe.startsWith('//')) {
         iframe = $el.find('a').attr('data-video').slice(2);
-      } 
+      }
       servers.push({
         name: name,
         iframe: iframe
       });
     })
-    promises.push(animeContentHandler(animeId).then(extra =>({
+    promises.push(animeContentHandler(animeId).then(extra => ({
       img: extra[0] ? extra[0].img : null,
+      id: id ? id.replace('/category/', '') : null,
       synopsis: extra[0] ? extra[0].synopsis : null,
       genres: extra[0] ? extra[0].genres : null,
       category: category ? category : null,
@@ -273,36 +283,37 @@ const animeEpisodeHandler = async(id) =>{
   return await Promise.all(promises);
 }
 
-const animeContentHandler = async(id) =>{
+const animeContentHandler = async (id) => {
   const res = await fetch(`${url.BASE_URL}${id}`);
   const body = await res.text();
   const $ = cheerio.load(body);
   const promises = [];
 
-  $('div#wrapper_bg').each((index , element) =>{
+  $('div#wrapper_bg').each((index, element) => {
     const $element = $(element);
     const img = $element.find('div.anime_info_body_bg img').attr('src');
     const synopsis = $element.find('div.anime_info_body_bg p.type').eq(1).text();
     const genres = [];
-    $element.find('div.anime_info_body_bg p.type').eq(2).find('a').each((j , el) =>{
+    $element.find('div.anime_info_body_bg p.type').eq(2).find('a').each((j, el) => {
       const $el = $(el);
       const genre = $el.attr('href').split('/')[4];
       genres.push(genre);
     });
-    const released = parseInt($element.find('div.anime_info_body_bg p.type').eq(3).text().match(/\d+/g) , 10);
-    const status = $element.find('div.anime_info_body_bg p.type').eq(4).text().replace('Status:' , '').trim();
-    const otherName = $element.find('div.anime_info_body_bg p.type').eq(5).text().replace('Other name:' , '').trim();
+    const released = parseInt($element.find('div.anime_info_body_bg p.type').eq(3).text().match(/\d+/g), 10);
+    const status = $element.find('div.anime_info_body_bg p.type').eq(4).text().replace('Status:', '').trim();
+    const otherName = $element.find('div.anime_info_body_bg p.type').eq(5).text().replace('Other name:', '').trim();
     const title = $element.find('div.anime_info_body_bg h1').text().trim();
     const liTotal = $('div.anime_video_body ul#episode_page li').length;
-    const totalEpisodes = parseInt($('div.anime_video_body ul#episode_page li').eq(liTotal - 1).find('a').text().split('-')[1] , 10);
-    const episodes = Array.from({length: totalEpisodes} , (v , k) =>{
+    const totalEpisodes = parseInt($('div.anime_video_body ul#episode_page li').eq(liTotal - 1).find('a').text().split('-')[1], 10);
+    const episodes = Array.from({ length: totalEpisodes }, (v, k) => {
       const animeId = `${id}-episode-${k + 1}`.slice(10);
-      return{
+      return {
         id: animeId
       }
     });
     promises.push({
       title: title,
+      id: id ? id.replace('/category/', '') : null,
       img: img,
       synopsis: synopsis,
       genres: genres,
@@ -316,20 +327,20 @@ const animeContentHandler = async(id) =>{
   return await Promise.all(promises);
 };
 
-const decodeVidstreamingIframeURL = async(url) =>{
+const decodeVidstreamingIframeURL = async (url) => {
   const _url = `https://${url}`;
   let realUrl = "";
-  if(_url.includes('streaming')){
-    realUrl = _url.replace(/streaming/g , 'check').trim();
-    if(realUrl.includes('vidcheck.io')){
-      realUrl = _url.replace(/vidcheck.io/g , 'vidstreaming.io').trim();
+  if (_url.includes('streaming')) {
+    realUrl = _url.replace(/streaming/g, 'check').trim();
+    if (realUrl.includes('vidcheck.io')) {
+      realUrl = _url.replace(/vidcheck.io/g, 'vidstreaming.io').trim();
     }
   }
-  if(_url.includes('load')){
-    realUrl = _url.replace(/load/g , 'check').trim();
+  if (_url.includes('load')) {
+    realUrl = _url.replace(/load/g, 'check').trim();
   }
-  if(_url.includes('server')){
-    realUrl = _url.replace(/server/g , 'check').trim();
+  if (_url.includes('server')) {
+    realUrl = _url.replace(/server/g, 'check').trim();
   }
 
   const data = await cloudscraper(realUrl);
@@ -338,10 +349,10 @@ const decodeVidstreamingIframeURL = async(url) =>{
     .filter(url => url.includes('.mp4') || url.includes('m3u8'));
 
   const URLs = [];
-  Array.from({length: _URLs.length} , (v , k) =>{
+  Array.from({ length: _URLs.length }, (v, k) => {
     const option = k + 1;
-    let url  = _URLs[k];
-    if(!url.includes('https://')){
+    let url = _URLs[k];
+    if (!url.includes('https://')) {
       url = `https://${url}`
     }
     URLs.push({
@@ -349,7 +360,7 @@ const decodeVidstreamingIframeURL = async(url) =>{
       url: url || null
     })
   });
-  
+
   return Promise.all(URLs);
 }
 
